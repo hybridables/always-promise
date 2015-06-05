@@ -10,9 +10,9 @@
     "test": "standard && node test.js"
   },
   "dependencies": {
-    "bluebird": "^2.9.27",
-    "is-async-function": "^1.0.0",
-    "make-callback": "^1.0.0"
+    "bluebird": "~2.9.27",
+    "is-async-function": "~1.0.0",
+    "make-callback": "~1.0.0"
   },
   "devDependencies": {
     "assertit": "^0.1.0"
