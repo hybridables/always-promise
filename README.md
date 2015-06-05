@@ -17,6 +17,34 @@ npm test
 
 ```js
 var alwaysPromise = require('always-promise')
+
+var JsonParsePromise = alwaysPromise(JSON.parse)
+var JsonStringifyPromise = alwaysPromise(JSON.stringify)
+var readFileSyncPromise = alwaysPromise(fs.readFileSync)
+var statFilePromise = alwaysPromise(fs.stat)
+
+// it would be prettified
+JsonStringifyPromise({foo: 'bar', baz: 'qux'}, null, 2)
+.then(function (res) {
+  console.log(res)
+  //=> {
+  //   "foo": "bar",
+  //   "baz": "qux"
+  // }
+})
+
+readFileSyncPromise('./package.json', 'utf8')
+.then(JsonParsePromise)
+.then(function (res) {
+  // parsed package.json
+  console.log(res)
+  //=> { name: 'always-promise', ... }
+})
+
+statFilePromise('./index.js')
+.then(function (stats) {
+  console.log(stats.isFile()) //=> true
+})
 ```
 
 
