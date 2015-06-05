@@ -17,5 +17,23 @@
   "devDependencies": {
     "assertit": "^0.1.0"
   },
-  "keywords": []
+  "keywords": [
+    "always",
+    "api",
+    "async",
+    "asynchronous",
+    "bluebird",
+    "callback",
+    "cb",
+    "control",
+    "convert",
+    "create",
+    "flow",
+    "function",
+    "make",
+    "promise",
+    "promises",
+    "sync",
+    "synchronous"
+  ]
 }
