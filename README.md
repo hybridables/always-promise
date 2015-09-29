@@ -87,6 +87,14 @@ promisify((one, two, three, cb) => {
 ```
 
 
+## Related
+- [always-done](https://github.com/hybidables/always-done): Handles completion and errors of anything!
+- [always-thunk](https://github.com/hybidables/always-thunk): Create thunk from **anything**, works like `thunkify`. Transforms anything (callbacks, streams, promises, observables, child processes, sync and generator functions) to thunk.
+- [native-or-another](https://github.com/tunnckocore/native-or-another): Always will expose native `Promise` if available, otherwise `Bluebird` but only if you don't give another promise module like `q` or `promise` or what you want.
+- [native-promise](https://github.com/tunnckocore/native-promise): Get native `Promise` or falsey value if not available.
+- [merz](https://github.com/hybidables/merz): Wrapper to handle completion and errors of sync and async functions, promises, generators, streams, observables and child processes.
+
+
 ## Contributing
 Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/hybridables/always-promise/issues/new).  
 But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) guidelines.
