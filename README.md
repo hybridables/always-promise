@@ -1,6 +1,6 @@
-# always-promise [![npmjs.com][npmjs-img]][npmjs-url] [![The MIT License][license-img]][license-url] 
+# [always-promise][author-www-url] [![npmjs.com][npmjs-img]][npmjs-url] [![The MIT License][license-img]][license-url] 
 
-> Create Bluebird Promise from given async or synchronous function. It automatically convert sync functions to async, then to promise.
+> Promisify, basically, everything.
 
 [![code climate][codeclimate-img]][codeclimate-url] [![standard code style][standard-img]][standard-url] [![travis build status][travis-img]][travis-url] [![coverage status][coveralls-img]][coveralls-url] [![dependency status][david-img]][david-url]
 
@@ -8,7 +8,6 @@
 ## Install
 ```
 npm i always-promise --save
-npm test
 ```
 
 
@@ -16,51 +15,12 @@ npm test
 > For more use-cases see the [tests](./test.js)
 
 ```js
-var alwaysPromise = require('always-promise')
-
-var JsonParsePromise = alwaysPromise(JSON.parse)
-var JsonStringifyPromise = alwaysPromise(JSON.stringify)
-var readFileSyncPromise = alwaysPromise(fs.readFileSync)
-var statFilePromise = alwaysPromise(fs.stat)
-
-// it would be prettified
-JsonStringifyPromise({foo: 'bar', baz: 'qux'}, null, 2)
-.then(function (res) {
-  console.log(res)
-  //=> {
-  //   "foo": "bar",
-  //   "baz": "qux"
-  // }
-})
-
-readFileSyncPromise('./package.json', 'utf8')
-.then(JsonParsePromise)
-.then(function (res) {
-  // parsed package.json
-  console.log(res)
-  //=> { name: 'always-promise', ... }
-})
-
-statFilePromise('./index.js')
-.then(function (stats) {
-  console.log(stats.isFile()) //=> true
-})
+var promisify = require('always-promise')
 ```
 
 
-## Related
-- [make-callback](https://github.com/tunnckocore/make-callback): Make synchronous function to support callback api
-- [always-callback](https://github.com/tunnckocore/always-callback): Create callback api for given sync function. Guarantee that given function (sync or async, no matter) will always have callback api and will handle errors correctly.
-- [handle-callback](https://github.com/hybridables/handle-callback): Initial step for creating hybrid APIs, used by `hybridify`. Handle callback in promise - give promise and callback return promise.
-- [handle-arguments](https://github.com/hybridables/handle-arguments): Handles given Arguments object - return separatly last argument (commonly callback) and other arguments as Array. Useful in node-style callback flow.
-- [manage-arguments](https://github.com/tunnckocore/manage-arguments): Prevents arguments leakage - managing arguments. From Optimization killers by Petka Antonov.
-- [is-async-function](https://github.com/tunnckocore/is-async-function): Check that given function is async (callback) function or not. Trying to guess that based on check if `callback` or `cb` exists in function arguments.
-- [is-sync-function](https://github.com/tunnckocore/is-sync-function): Opposite of `is-async-function`. Check that given function is synchronous.
-
-
 ## Contributing
-
-Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/tunnckoCore/always-promise/issues/new).  
+Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/hybridables/always-promise/issues/new).  
 But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) guidelines.
 
 
@@ -72,21 +32,21 @@ But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) 
 [npmjs-url]: https://www.npmjs.com/package/always-promise
 [npmjs-img]: https://img.shields.io/npm/v/always-promise.svg?label=always-promise
 
-[license-url]: https://github.com/tunnckoCore/always-promise/blob/master/LICENSE.md
+[license-url]: https://github.com/hybridables/always-promise/blob/master/LICENSE.md
 [license-img]: https://img.shields.io/badge/license-MIT-blue.svg
 
 
-[codeclimate-url]: https://codeclimate.com/github/tunnckoCore/always-promise
-[codeclimate-img]: https://img.shields.io/codeclimate/github/tunnckoCore/always-promise.svg
+[codeclimate-url]: https://codeclimate.com/github/hybridables/always-promise
+[codeclimate-img]: https://img.shields.io/codeclimate/github/hybridables/always-promise.svg
 
-[travis-url]: https://travis-ci.org/tunnckoCore/always-promise
-[travis-img]: https://img.shields.io/travis/tunnckoCore/always-promise.svg
+[travis-url]: https://travis-ci.org/hybridables/always-promise
+[travis-img]: https://img.shields.io/travis/hybridables/always-promise.svg
 
-[coveralls-url]: https://coveralls.io/r/tunnckoCore/always-promise
-[coveralls-img]: https://img.shields.io/coveralls/tunnckoCore/always-promise.svg
+[coveralls-url]: https://coveralls.io/r/hybridables/always-promise
+[coveralls-img]: https://img.shields.io/coveralls/hybridables/always-promise.svg
 
-[david-url]: https://david-dm.org/tunnckoCore/always-promise
-[david-img]: https://img.shields.io/david/tunnckoCore/always-promise.svg
+[david-url]: https://david-dm.org/hybridables/always-promise
+[david-img]: https://img.shields.io/david/hybridables/always-promise.svg
 
 [standard-url]: https://github.com/feross/standard
 [standard-img]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg
@@ -110,5 +70,5 @@ But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) 
 [freenode-url]: http://webchat.freenode.net/?channels=charlike
 [freenode-img]: https://img.shields.io/badge/freenode-%23charlike-5654a4.svg
 
-[new-message-url]: https://github.com/tunnckoCore/messages
-[new-message-img]: https://img.shields.io/badge/send%20me-message-green.svg
+[new-message-url]: https://github.com/tunnckoCore/ama
+[new-message-img]: https://img.shields.io/badge/ask%20me-anything-green.svg

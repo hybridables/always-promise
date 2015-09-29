@@ -1,8 +1,8 @@
 {
   "name": "always-promise",
   "version": "1.0.0",
-  "description": "Create Bluebird Promise from given async or synchronous function. It automatically convert sync functions to async, then to promise.",
-  "repository": "tunnckoCore/always-promise",
+  "description": "Promisify, basically, everything.",
+  "repository": "hybridables/always-promise",
   "author": "Charlike Mike Reagent <@tunnckoCore> (http://www.tunnckocore.tk)",
   "main": "index.js",
   "license": "MIT",
@@ -10,13 +10,17 @@
     "test": "standard && node test.js"
   },
   "dependencies": {
-    "bluebird": "~2.9.27",
-    "is-async-function": "~1.0.0",
-    "make-callback": "~1.0.0"
+    "merz": "^0.6.0",
+    "redolent": "^1.0.0"
   },
   "devDependencies": {
-    "assertit": "^0.1.0"
+    "assertit": "^0.1.0",
+    "promise": "^7.0.4",
+    "semver": "^5.0.3"
   },
+  "files": [
+    "index.js"
+  ],
   "keywords": [
     "always",
     "api",
