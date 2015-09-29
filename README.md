@@ -1,6 +1,6 @@
 # [always-promise][author-www-url] [![npmjs.com][npmjs-img]][npmjs-url] [![The MIT License][license-img]][license-url] 
 
-> Promisify, basically, everything.
+> Promisify, basically, everything. Generator function, callback-style or synchronous function; sync function that returns child process, stream or observable; directly passed promise, stream or child process.
 
 [![code climate][codeclimate-img]][codeclimate-url] [![standard code style][standard-img]][standard-url] [![travis build status][travis-img]][travis-url] [![coverage status][coveralls-img]][coveralls-url] [![dependency status][david-img]][david-url]
 
@@ -14,16 +14,20 @@ npm i always-promise --save
 ## Usage
 > For more use-cases see the [tests](./test.js) or try [examples](./examples)
 
+### [alwaysPromise](./index.js#L25)
+> Promisify everything!
+
 - `<val>` **{Function|GeneratorFunction|Stream|Promise}** anything that [merz](https://github.com/hybridables/merz) accepts
 - `Prom` **{Function}** custom promise module, which will be used for promisify-ing
 - `return` **{Function}** which returns promise
+
+**Example**
 
 ```js
 const promisify = require('always-promise')
 ```
 
-**JSON.stringify**
-
+### JSON.stringify
 > Specific use-case which shows correct and working handling of optional arguments.
 
 ```js
@@ -42,8 +46,7 @@ promisify(JSON.stringify)({foo: 'bar'}, null, 2).then(function (data) {
 }, console.error)
 ```
 
-**callback-style and sync functions**
-
+### callback-style and sync functions
 > Again, showing correct handling of optinal arguments using native `fs` module.
 
 ```js
@@ -56,7 +59,6 @@ promisify(fs.stat)('package.json')
 }, console.error)
 
 // correct handling of optional arguments
-// using native modules
 promisify(fs.readFile)('package.json')
 .then(buf => {
   console.log(Buffer.isBuffer(buf)) //=> true
@@ -71,8 +73,7 @@ promisify(fs.readFileSync)('package.json', 'utf-8')
 }, console.error)
 ```
 
-**flatten multiple arguments by default**
-
+### flatten multiple arguments by default
 > If you pass more than two arguments to the callback, they will be flattened by default.
 
 ```js
