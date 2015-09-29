@@ -12,10 +12,77 @@ npm i always-promise --save
 
 
 ## Usage
-> For more use-cases see the [tests](./test.js)
+> For more use-cases see the [tests](./test.js) or try [examples](./examples)
+
+- `<val>` **{Function|GeneratorFunction|Stream|Promise}** anything that [merz](https://github.com/hybridables/merz) accepts
+- `Prom` **{Function}** custom promise module, which will be used for promisify-ing
+- `return` **{Function}** which returns promise
 
 ```js
-var promisify = require('always-promise')
+const promisify = require('always-promise')
+```
+
+**JSON.stringify**
+
+> Specific use-case which shows correct and working handling of optional arguments.
+
+```js
+promisify(JSON.stringify)({foo: 'bar'})
+.then(data => {
+  console.log(data) //=> {"foo":"bar"}
+}, console.error)
+
+// result with identation
+promisify(JSON.stringify)({foo: 'bar'}, null, 2).then(function (data) {
+  console.log(data)
+  // =>
+  // {
+  //   "foo": "bar"
+  // }
+}, console.error)
+```
+
+**callback-style and sync functions**
+
+> Again, showing correct handling of optinal arguments using native `fs` module.
+
+```js
+const fs = require('fs')
+
+// callback function
+promisify(fs.stat)('package.json')
+.then(res => {
+  console.log(res.isFile()) //=> true
+}, console.error)
+
+// correct handling of optional arguments
+// using native modules
+promisify(fs.readFile)('package.json')
+.then(buf => {
+  console.log(Buffer.isBuffer(buf)) //=> true
+}, console.error)
+
+// read json file and parse it,
+// because it will be utf8 string
+promisify(fs.readFileSync)('package.json', 'utf-8')
+.then(JSON.parse)
+.then(data => {
+  console.log(data.name) //=> 'always-callback'
+}, console.error)
+```
+
+**flatten multiple arguments by default**
+
+> If you pass more than two arguments to the callback, they will be flattened by default.
+
+```js
+promisify((one, two, three, cb) => {
+  cb(null, one, two, 33)
+})(11, 22)
+.then(res => {
+  console.log(Array.isArray(res)) //=> true
+  console.log(res) //=> [11, 22, 33]
+}, console.error)
 ```
 
 

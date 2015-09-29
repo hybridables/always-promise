@@ -15,7 +15,7 @@ var promisify = require('../index')
 
 promisify(JSON.stringify)({foo: 'bar'}).then(function (data) {
   console.log(data) // => {"foo":"bar"}
-})
+}, console.error)
 
 /**
  * JSON.stringify with identation
@@ -27,7 +27,7 @@ promisify(JSON.stringify)({foo: 'bar'}, null, 2).then(function (data) {
   // {
   //   "foo": "bar"
   // }
-})
+}, console.error)
 
 /**
  * JSON.parse
@@ -35,4 +35,4 @@ promisify(JSON.stringify)({foo: 'bar'}, null, 2).then(function (data) {
 
 promisify(JSON.parse)('{"foo":"bar"}').then(function (data) {
   console.log(data.foo) // => 'bar'
-})
+}, console.error)
