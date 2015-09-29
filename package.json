@@ -29,15 +29,21 @@
     "bluebird",
     "callback",
     "cb",
+    "child",
+    "child-process",
     "control",
     "convert",
     "create",
     "flow",
     "function",
+    "generator",
     "make",
+    "process",
     "promise",
     "promises",
+    "stream",
     "sync",
-    "synchronous"
+    "synchronous",
+    "transform"
   ]
 }
