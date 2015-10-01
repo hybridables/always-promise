@@ -18,14 +18,15 @@
  *
  * @name   alwaysPromise
  * @param  {Function|GeneratorFunction|Stream|Promise} `<val>` anything that [merz](https://github.com/hybridables/merz) accepts
- * @param  {Function} `[Prom]` custom promise module, which will be used for promisify-ing
+ * @param  {Function} `[Prome]` custom promise module, which will be used for promisify-ing
  * @return {Function} which returns promise
  * @api public
  */
-module.exports = function alwaysPromise (val, Prom) {
+module.exports = function alwaysPromise (val, Prome) {
   var self = this
-  return function hybridified () {
+  return function promisified () {
     var func = require('merz').call(self || this, val)
-    return require('redolent')(func, Prom).apply(self || this, arguments)
+    var PromiseCtor = Prome || alwaysPromise.promise || promisified.promise
+    return require('redolent')(func, PromiseCtor).apply(self || this, arguments)
   }
 }
