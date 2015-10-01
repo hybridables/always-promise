@@ -11,20 +11,82 @@ npm i always-promise --save
 ```
 
 
-## Usage
+## API
 > For more use-cases see the [tests](./test.js) or try [examples](./examples)
 
 ### [alwaysPromise](./index.js#L25)
 > Promisify everything!
 
 - `<val>` **{Function|GeneratorFunction|Stream|Promise}** anything that [merz](https://github.com/hybridables/merz) accepts
-- `Prom` **{Function}** custom promise module, which will be used for promisify-ing
+- `Prome` **{Function}** custom promise module, which will be used for promisify-ing
+  + you can also pass it through `alwaysPromise.promise` static property
+  + or through `promisifiedFn.promise` static property
 - `return` **{Function}** which returns promise
 
 **Example**
 
 ```js
 const promisify = require('always-promise')
+```
+
+### alwaysPromise.promise
+> Static property on which you can pass custom promise constructor.  
+Actually same as `Prome` argument.
+
+**Example**
+
+```js
+const fs = require('fs')
+
+// `q` promise will be used if not native promise available
+// but only in node <= 0.11.12
+promisify.promise = require('q')
+promisify(fs.readFile)('package.json', 'utf-8').then(data => {
+  console.log(JSON.parse(data).name)
+})
+```
+
+### promisifiedFn.promise
+> You also can pass custom promise module through `.promise` static property of the returned promisified function. 
+
+**Example**
+
+```js
+const fs = require('fs')
+const readFile = promisify(fs.readFileSync)
+
+// `q` promise will be used if not native promise available
+// but only in node <= 0.11.12
+readFile.promise = require('q')
+
+readFile('package.json', 'utf-8').then(data => {
+  console.log(JSON.parse(data).name)
+})
+```
+
+## Examples
+> Showing few examples how to can be used. See more in [examples dir](./examples) or [tests](./test.js)
+
+### Generator function
+> Promisify-ing generator function, yielding readFile thunk
+
+```js
+const fs = require('fs')
+
+function readThunk (fp) {
+  return function (done) {
+    fs.readFile(fp, 'utf8', done)
+  }
+}
+
+const readFile = promisify(function * (filepath) {
+  var data = yield read(filepath)
+  return JSON.parse(data)
+})
+
+readFile('package.json').then(function (json) {
+  console.log(json.name) // => 'always-promise'
+}, console.error)
 ```
 
 ### JSON.stringify
