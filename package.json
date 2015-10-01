@@ -1,7 +1,7 @@
 {
   "name": "always-promise",
   "version": "1.1.0",
-  "description": "Promisify, basically, everything.",
+  "description": "Promisify, basically, everything. Generator function, callback-style or synchronous function; sync function that returns child process, stream or observable; directly passed promise, stream or child process.",
   "repository": "hybridables/always-promise",
   "author": "Charlike Mike Reagent <@tunnckoCore> (http://www.tunnckocore.tk)",
   "main": "index.js",
