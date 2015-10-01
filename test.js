@@ -12,6 +12,7 @@
 var fs = require('fs')
 var semver = require('semver')
 var test = require('assertit')
+var isBuffer = require('is-buffer')
 var alwaysPromise = require('./index')
 
 function multipleArgs (one, two, three, callback) {
@@ -134,3 +135,32 @@ test('should flatten multiple arguments by default', function (done) {
   }, done)
 })
 
+test('should promisify with promise module given in `alwaysPromise.promise`', function (done) {
+  alwaysPromise.promise = require('promise')
+  var readFile = alwaysPromise(fs.readFile)
+  var promise = readFile('package.json')
+
+  promise.then(function (res) {
+    test.strictEqual(isBuffer(res), true)
+    if (semver.lt(process.version, '0.11.13')) {
+      test.strictEqual(promise.___customPromise, true)
+      test.strictEqual(promise.Prome.___customPromise, true)
+    }
+    done()
+  }, done)
+})
+
+test('should promisify with promise module given in `promisifiedFn.promise`', function (done) {
+  var readFile = alwaysPromise(fs.readFile)
+  readFile.promise = require('promise')
+  var promise = readFile('package.json')
+
+  promise.then(function (res) {
+    test.strictEqual(isBuffer(res), true)
+    if (semver.lt(process.version, '0.11.13')) {
+      test.strictEqual(promise.___customPromise, true)
+      test.strictEqual(promise.Prome.___customPromise, true)
+    }
+    done()
+  }, done)
+})

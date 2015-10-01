@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "assertit": "^0.1.0",
+    "is-buffer": "^1.1.0",
     "promise": "^7.0.4",
     "semver": "^5.0.3"
   },
