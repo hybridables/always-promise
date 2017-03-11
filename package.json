@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "merz": "*",
-    "redolent": "^1.0.0"
+    "redolent": "^2.0.0"
   },
   "devDependencies": {
     "assertit": "^0.1.0",
